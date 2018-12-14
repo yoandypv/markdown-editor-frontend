@@ -1,14 +1,61 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content style="height: 100%; width: 100%">
+  <ion-grid style="padding: 0px">
+    <ion-row>
+      <ion-col col-2 style="background-color: black; height: 100%;">
+        <ion-row>
+        <div style="height: 50px; background-color: black; width: 100%">
+         <p style="color: white; text-align: center"> Markdown Editor</p>  
+        </div>
+        </ion-row>
+        <ion-row>          
+            <ion-card *ngFor="let item of allMarkdowns" (click)="representarMd(item)">
+              <ion-grid>
+                <ion-row>
+              <ion-col col-2> 
+                  <ion-icon name="document" style="font-size: 72px; opacity: 0.4;"></ion-icon>
+              </ion-col>
+              <ion-col col-10>
+                <ion-row> 
+                   <ion-label style="padding-left: 20px">Document {{item.id}} </ion-label> 
+                </ion-row>   
+                 <ion-row>
+                   <span style="padding-left: 20px; font-size: 9px">
+                        {{item.lastmodify}}
+                     </span>
+                  </ion-row>
+               
+                <ion-row>
+                    <ion-label>
+                      <ion-buttons end>              
+                        <button style="margin: -5px 0 -5px -5px!important;" class="button-delete" small clear ion-button icon-only (click)="removeMarkdown(item.id)">
+                          <ion-icon name="trash" style="color: lightslategrey"></ion-icon>
+                        </button>                       
+                      </ion-buttons>
+                    </ion-label>               
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+              </ion-card>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+        </ion-row>
+      </ion-col>
+      <ion-col col-5 style="padding-left: 5px; border-left: black; border-left-width: 2px; border-left-style: solid; height: 100%;">
+          <form #form="ngForm" (ngSubmit)="createOrUpdateMarkdown(form)" style="height: 100%;">
+              <ion-item style="height: 100%;" >
+                  <ion-textarea (change)="actualizarDocumento()" style="height: 100%;" [(ngModel)]="currentmd" name="currentmd" placeholder="Escriba acá su documento de Markdown"></ion-textarea>
+               </ion-item>
+          </form>
+      </ion-col>
+      <ion-col col-5 style="padding-left: 5px; border-left: black; border-left-width: 2px; border-left-style: solid" >         
+         <div [innerHTML] = "markdownpreview"> </div>
+      </ion-col>
+    </ion-row>
+   
+  </ion-grid>
+
+  <ion-fab right bottom>
+      <button ion-fab color="principal" (click)="addMarkdown()" ><ion-icon name="add-circle"></ion-icon></button>
+  </ion-fab>
 </ion-content>
