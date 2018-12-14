@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
-import { NgForm } from '@angular/forms';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import {markdown} from 'markdown';  
 
